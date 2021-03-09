@@ -1,0 +1,21 @@
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
+import config from '../config'
+import { window } from '../libs/global'
+
+let initialized = false
+
+console.log('> config', config)
+
+if (!initialized && window) {
+  window.firebase = firebase
+  firebase.initializeApp({
+    apiKey: config.firebaseApiKey,
+    databaseURL: config.firebaseDatabaseUrl,
+    projectId: config.firebaseProjectName,
+  })
+  initialized = true
+}
+
+export default (ref) => firebase.database().ref(ref)
