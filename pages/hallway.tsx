@@ -8,13 +8,11 @@ import Input from '../src/components/HomePage/Input'
 import generateClassroomNumber from '../src/libs/generateClassroomNumber'
 import useUser from '../src/hooks/useUser'
 import useCreateClassroom from '../src/hooks/useCreateClassroom'
-// import { create } from '../src/libs/classroom'
 
 const Hallway = () => {
   const classroomNumRef = useRef<HTMLInputElement>(null)
   const [newClassroomNum, setNewClassroomNum] = useState(generateClassroomNumber())
   const { create, error, randomKey } = useCreateClassroom()
-
   const { username } = useUser()
 
   const _joinClassroom = () => {}

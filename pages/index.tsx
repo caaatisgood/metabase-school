@@ -1,12 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import Router from 'next/router'
 import styled from 'styled-components'
 import { login } from '../src/apis/auth'
 import SEO from '../src/components/seo'
 import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
 import Input from '../src/components/HomePage/Input'
+import useUser from '../src/hooks/useUser'
 
 const IndexPage = () => {
+  const { username } = useUser()
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const onSubmit = (evt: React.FormEvent) => {
@@ -15,6 +18,12 @@ const IndexPage = () => {
     const password = passwordRef?.current?.value || ''
     login({ username, password })
   }
+
+  useEffect(() => {
+    if (username) {
+      Router.push('/hallway')
+    }
+  }, [username])
 
   return (
     <>
