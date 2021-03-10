@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 // import Firepad from 'firepad'
-import MonacoEditor from 'react-monaco-editor'
 import getFirebaseRef from '../../libs/getFirebaseRef'
+
+const MonacoEditor = dynamic(import('@monaco-editor/react'), { ssr: false })
 
 const OPTIONS = {
   selectOnLineNumbers: true,
@@ -53,9 +55,31 @@ const Editor: React.FC<Props> = ({ username, value, onChange }) => {
   }
 
   const _editorDidMount = (editor) => {
+    // _setupMonacoWorker()
     _editor = editor
     _initFirebaseRef()
     _initFirepad()
+  }
+
+  const _setupMonacoWorker = () => {
+    // @ts-ignore
+    window.MonacoEnvironment.getWorkerUrl = (
+      _moduleId: string,
+      label: string
+    ) => {
+      if (label === "json")
+        return "_next/static/json.worker.js"
+      if (label === "css")
+        return "_next/static/css.worker.js"
+      if (label === "html")
+        return "_next/static/html.worker.js"
+      if (
+        label === "typescript" ||
+        label === "javascript"
+      )
+        return "_next/static/ts.worker.js"
+      return "_next/static/editor.worker.js"
+    }
   }
 
   const _initFirepad = () => {
@@ -70,13 +94,17 @@ const Editor: React.FC<Props> = ({ username, value, onChange }) => {
   return (
     <StyledWrapper>
       <MonacoEditor
-        language='sql'
+        defaultLanguage='sql'
         theme='vs-dark'
-        value={value}
-        options={OPTIONS}
+        onMount={_editorDidMount}
         onChange={onChange}
-        editorWillMount={_editorWillMount}
-        editorDidMount={_editorDidMount}
+        // language='sql'
+        // theme='vs-dark'
+        // value={value}
+        // options={OPTIONS}
+        // onChange={onChange}
+        // editorWillMount={_editorWillMount}
+        // editorDidMount={_editorDidMount}
       />
     </StyledWrapper>
   )

@@ -6,6 +6,7 @@ const theme = {
   colors: {
     primary: '#5b5c5b',
     background: '#ebebeb',
+    error: '#e63946',
   },
   smallText: css`
     font-size: 0.8rem;

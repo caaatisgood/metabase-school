@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { RouteComponentProps } from '@reach/router'
 import { queryDataset } from '../../apis/query'
 import Result from './Result'
 import Editor from './Editor'
@@ -11,7 +10,7 @@ type Databases = {
   name: string
   id: string
 }
-interface Props extends RouteComponentProps {
+interface Props {
   username?: string
   databases: Databases[]
 }

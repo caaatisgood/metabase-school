@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Router } from '@reach/router'
 import Head from 'next/head'
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
@@ -81,9 +80,7 @@ const Layout: React.FC = () => {
       <StyledInner>
         <StyledSidebar username={username} users={users} />
         <main>
-          <Router basepath='/queries'>
-            <Board path='/:username' username={username} databases={databases} />
-          </Router>
+          <Board username={username} databases={databases} />
         </main>
       </StyledInner>
     </StyledWrapper>

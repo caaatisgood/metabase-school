@@ -6,8 +6,6 @@ import { window } from '../libs/global'
 
 let initialized = false
 
-console.log('> config', config)
-
 if (!initialized && window) {
   window.firebase = firebase
   firebase.initializeApp({

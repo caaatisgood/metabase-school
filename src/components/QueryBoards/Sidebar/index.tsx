@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useLocation } from '@reach/router'
 import Tab from './Tab'
 import { User, Username } from './types'
 
@@ -15,10 +14,9 @@ type Props = {
 const Sidebar: React.FC<Props> = ({ username, users }) => {
   const self = users[username!]
   const mates = Object.entries(users).filter(([key]) => key !== username)
-  const location = useLocation()
 
   const _isActive = (username?: Username) => {
-    return location.pathname.indexOf(username!) > -1
+    return window.location.pathname.indexOf(username!) > -1
   }
 
   return (
