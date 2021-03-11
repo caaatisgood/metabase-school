@@ -7,6 +7,7 @@ import getFirebaseRef from '../../libs/getFirebaseRef'
 import Cookies from '../../libs/cookies'
 import { USERNAME_COOKIE } from '../../constants/auth'
 import { fetchDatabases } from '../../apis/query'
+import { getUserPath, getQueriesPath } from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
 import Board from '../Board'
@@ -74,7 +75,6 @@ const Layout: React.FC = () => {
           src='https://cdn.jsdelivr.net/npm/firepad@1.5.10/dist/firepad.min.js'
           type='text/javascript'
         />
-        <meta name='robots' content='noindex' />
       </Head>
       <Header siteTitle={siteMetadata.title} />
       <StyledInner>

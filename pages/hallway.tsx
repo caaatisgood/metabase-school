@@ -28,7 +28,7 @@ const Hallway = () => {
 
   useEffect(() => {
     if (randomKey) {
-      Router.push(`/classrooms/${randomKey}/queries/${username}`)
+      Router.push(`/c/${randomKey}/queries/${username}`)
     }
   }, [randomKey])
 
@@ -85,7 +85,6 @@ const StyledDivider = styled.div`
 `
 const StyledError = styled.span`
   color: ${({ theme }) => theme.colors.error};
-
 `
 
 export default Hallway
