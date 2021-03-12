@@ -6,7 +6,7 @@ const useUser = () => {
   const [username] = useState(Cookies.get(USERNAME_COOKIE))
 
   return {
-    username,
+    username: username || '',
   }
 }
 

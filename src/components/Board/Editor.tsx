@@ -6,14 +6,14 @@ import getFirebaseRef from '../../libs/getFirebaseRef'
 
 const MonacoEditor = dynamic(import('@monaco-editor/react'), { ssr: false })
 
-const OPTIONS = {
-  selectOnLineNumbers: true,
-  roundedSelection: false,
-  readOnly: false,
-  cursorStyle: 'line',
-  automaticLayout: false,
-  tabSize: 2,
-}
+// const OPTIONS = {
+//   selectOnLineNumbers: true,
+//   roundedSelection: false,
+//   readOnly: false,
+//   cursorStyle: 'line',
+//   automaticLayout: false,
+//   tabSize: 2,
+// }
 
 const FIREBASE_BOARDS_REF = `rooms/200619/boards`
 

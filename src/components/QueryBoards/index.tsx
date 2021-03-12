@@ -1,58 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useObjectVal } from 'react-firebase-hooks/database';
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
+import useUser from '../../hooks/useUser'
 import siteMetadata from '../../constants/siteMetadata'
 import getFirebaseRef from '../../libs/getFirebaseRef'
-import Cookies from '../../libs/cookies'
-import { USERNAME_COOKIE } from '../../constants/auth'
 import { fetchDatabases } from '../../apis/query'
-import { getUserPath, getQueriesPath } from '../../libs/getClassroomFirebasePath'
+import { getUsersPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
 import Board from '../Board'
 import Sidebar from './Sidebar'
 
-const FIREBASE_USERS_REF = `rooms/200619/users`
-const FIREBASE_BOARDS_REF = `rooms/200619/boards`
-
 const Layout: React.FC = () => {
-  const [users, setUsers] = useState({})
-  const [username, setUsername] = useState<string | undefined>()
+  const router = useRouter()
+  const { username } = useUser()
+  const randomKey = router.query.randomKey as string
+  const usersRefPath = getUsersPath({ randomKey })
+  const [users] = useObjectVal(getFirebaseRef(usersRefPath))
   const [databases, setDatabases] = useState([])
-
+  
   useEffect(() => {
-    const asyncEffect = async () => {
-      const username = Cookies.get(USERNAME_COOKIE)
-      setUsername(username)
-      const userRefPath = `${FIREBASE_USERS_REF}/${username}`
-      const userRef = getFirebaseRef(userRefPath)
-      const userSnapshot = await userRef.once('value')
-      const userValue = userSnapshot.val()
-      if (!userValue) {
-        userRef.set({
+    const asyncFunc = async () => {
+      const usersRef = getFirebaseRef(usersRefPath)
+      const usersSnapshot = await usersRef.once('value')
+      const usersValue = usersSnapshot.val()
+      if (!usersValue) {
+        usersRef.set({
           username,
         })
       }
-      const boardRefPath = `${FIREBASE_BOARDS_REF}/${username}`
-      const boardRef = getFirebaseRef(boardRefPath)
-      const boardSnapshot = await boardRef.once('value')
-      const boardValue = boardSnapshot.val()
-      if (!boardValue) {
-        boardRef.set({
+      const queriesRefPath = getQueryPath({ username, randomKey })
+      const queriesRef = getFirebaseRef(queriesRefPath)
+      const queriesSnapshot = await queriesRef.once('value')
+      const queriesValue = queriesSnapshot.val()
+      if (!queriesValue) {
+        queriesRef.set({
           __placeholder: username,
         })
       }
     }
-    asyncEffect()
-  }, [])
-
-  useEffect(() => {
-    const ref = getFirebaseRef(FIREBASE_USERS_REF)
-    ref.on('value', (snapshot) => {
-      const value = snapshot.val()
-      setUsers(value)
-    })
+    asyncFunc()
   }, [])
 
   useEffect(() => {

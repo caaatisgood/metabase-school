@@ -12,8 +12,8 @@ type Props = {
 }
 
 const Sidebar: React.FC<Props> = ({ username, users }) => {
-  const self = users[username!]
-  const mates = Object.entries(users).filter(([key]) => key !== username)
+  const self = users?.[username!]
+  const mates = users && Object.entries(users).filter(([key]) => key !== username)
 
   const _isActive = (username?: Username) => {
     return window.location.pathname.indexOf(username!) > -1
@@ -23,7 +23,7 @@ const Sidebar: React.FC<Props> = ({ username, users }) => {
     <StyledWrapper>
       {!!self && <Tab isActive={_isActive(username)} user={self} />}
       <hr />
-      {mates.map(([key, user]) => (
+      {mates?.map(([key, user]) => (
         <Tab isActive={_isActive(user.username)} key={key} user={user} />
       ))}
     </StyledWrapper>

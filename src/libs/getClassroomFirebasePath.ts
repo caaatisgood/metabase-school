@@ -1,12 +1,11 @@
-type GetClassroomPathParams = {
+export const getUsersPath = ({ randomKey }: { randomKey: string }) => {
+  return `classrooms/${randomKey}/users`
+}
+
+type GetQueryPath = {
   username: string,
   randomKey: string,
 }
-
-export const getUserPath = ({ username, randomKey }: GetClassroomPathParams) => {
-  return `classrooms/${randomKey}/users/${username}`
-}
-
-export const getQueriesPath = ({ username, randomKey }: GetClassroomPathParams) => {
+export const getQueryPath = ({ username, randomKey }: GetQueryPath) => {
   return `classrooms/${randomKey}/queries/${username}`
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Link from '../../../components/Link'
 import styled from 'styled-components'
 import { User } from './types'
 
@@ -9,9 +10,15 @@ type Props = {
 }
 
 const Tab: React.FC<Props> = ({ isActive, user }) => {
+  const router = useRouter()
   return (
     <StyledWrapper isActive={isActive}>
-      <Link href={`/queries/${user.username}`}>{user.username}</Link>
+      <Link href={{
+        pathname: router.pathname,
+        query: {
+          randomKey: router.query.randomKey,
+          username: user.username,
+        }}}>{user.username}</Link>
     </StyledWrapper>
   )
 }
