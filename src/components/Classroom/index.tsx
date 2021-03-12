@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useObjectVal } from 'react-firebase-hooks/database';
+import { useObjectVal } from 'react-firebase-hooks/database'
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
 import useUser from '../../hooks/useUser'
@@ -13,6 +13,7 @@ import { getUsersPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
 import Header from '../header'
 import Board from '../Board'
 import Sidebar from './Sidebar'
+import { Database } from '../../types/metabase'
 
 const Layout: React.FC = () => {
   const router = useRouter()
@@ -20,7 +21,7 @@ const Layout: React.FC = () => {
   const randomKey = router.query.randomKey as string
   const usersRefPath = getUsersPath({ randomKey })
   const [users] = useObjectVal(getFirebaseRef(usersRefPath))
-  const [databases, setDatabases] = useState([])
+  const [databases, setDatabases] = useState<Database[]>([])
   
   useEffect(() => {
     const asyncFunc = async () => {
