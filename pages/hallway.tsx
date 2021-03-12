@@ -28,7 +28,7 @@ const Hallway = () => {
 
   useEffect(() => {
     if (randomKey) {
-      Router.push(`/c/${randomKey}/queries/${username}`)
+      Router.push(`/c/${randomKey}/${username}`)
     }
   }, [randomKey])
 
