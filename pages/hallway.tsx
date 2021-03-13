@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import SEO from '../src/components/seo'
 import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
@@ -8,14 +8,20 @@ import Input from '../src/components/HomePage/Input'
 import generateClassroomNumber from '../src/libs/generateClassroomNumber'
 import useUser from '../src/hooks/useUser'
 import useCreateClassroom from '../src/hooks/useCreateClassroom'
+import useJoinClassroom from '../src/hooks/useJoinClassroom'
 
 const Hallway = () => {
+  const router = useRouter()
   const classroomNumRef = useRef<HTMLInputElement>(null)
   const [newClassroomNum, setNewClassroomNum] = useState(generateClassroomNumber())
-  const { create, error, randomKey } = useCreateClassroom()
+  const { create, error: createError, randomKey: createdRandomKey } = useCreateClassroom()
+  const { join, error: joinError, randomKey: joinedRandomKey } = useJoinClassroom()
   const { username } = useUser()
 
-  const _joinClassroom = () => {}
+  const _joinClassroom = (evt: React.FormEvent) => {
+    evt.preventDefault()
+    join(classroomNumRef?.current?.value as string)
+  }
 
   const _createClassroom = (evt: React.FormEvent) => {
     evt.preventDefault()
@@ -27,10 +33,16 @@ const Hallway = () => {
   }
 
   useEffect(() => {
-    if (randomKey) {
-      Router.push(`/c/${randomKey}/${username}`)
+    if (createdRandomKey) {
+      router.push(`/c/${createdRandomKey}/${username}`)
     }
-  }, [randomKey])
+  }, [createdRandomKey])
+
+  useEffect(() => {
+    if (joinedRandomKey) {
+      router.push(`/c/${joinedRandomKey}/${username}`)
+    }
+  }, [joinedRandomKey])
 
   return (
     <>
@@ -49,6 +61,9 @@ const Hallway = () => {
                 required
               />
             </StyledLabel>
+            <StyledError>
+              {joinError?.message}&nbsp;
+            </StyledError>
           </form>
           <StyledDivider>or</StyledDivider>
           <form onSubmit={_createClassroom}>
@@ -64,7 +79,7 @@ const Hallway = () => {
               />
             </StyledLabel>
             <StyledError>
-              {error?.message}&nbsp;
+              {createError?.message}&nbsp;
             </StyledError>
           </form>
         </EntiresLayout>
