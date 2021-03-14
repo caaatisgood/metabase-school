@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Tab from './Tab'
-import { User, Username } from './types'
+import { User, Username } from '../../../types/user'
 
 type Users = {
   [key: string]: User

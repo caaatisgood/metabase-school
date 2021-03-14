@@ -6,7 +6,7 @@ import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
 import Input from '../src/components/HomePage/Input'
 import generateClassroomNumber from '../src/libs/generateClassroomNumber'
-import useUser from '../src/hooks/useUser'
+import useSelf from '../src/hooks/useSelf'
 import useCreateClassroom from '../src/hooks/useCreateClassroom'
 import useJoinClassroom from '../src/hooks/useJoinClassroom'
 
@@ -16,7 +16,7 @@ const Hallway = () => {
   const [newClassroomNum, setNewClassroomNum] = useState(generateClassroomNumber())
   const { create, error: createError, randomKey: createdRandomKey } = useCreateClassroom()
   const { join, error: joinError, randomKey: joinedRandomKey } = useJoinClassroom()
-  const { username } = useUser()
+  const { username } = useSelf()
 
   const _joinClassroom = (evt: React.FormEvent) => {
     evt.preventDefault()

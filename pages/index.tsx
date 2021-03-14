@@ -6,10 +6,10 @@ import SEO from '../src/components/seo'
 import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
 import Input from '../src/components/HomePage/Input'
-import useUser from '../src/hooks/useUser'
+import useSelf from '../src/hooks/useSelf'
 
 const IndexPage = () => {
-  const { username } = useUser()
+  const { username } = useSelf()
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const onSubmit = (evt: React.FormEvent) => {

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useObjectVal } from 'react-firebase-hooks/database'
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
-import useUser from '../../hooks/useUser'
 import siteMetadata from '../../constants/siteMetadata'
+import useSelf from '../../hooks/useSelf'
+import usePeers from '../../hooks/classroom/usePeers'
 import getFirebaseRef from '../../libs/getFirebaseRef'
 import { fetchDatabases } from '../../apis/query'
-import { getUsersPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
+import { getClassroomPath, getPeerPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
 import QueryPanel from '../QueryPanel'
@@ -17,26 +17,36 @@ import { Database } from '../../types/metabase'
 
 const Layout: React.FC = () => {
   const router = useRouter()
-  const { username } = useUser()
+  const { username } = useSelf()
   const randomKey = router.query.randomKey as string
-  const usersRefPath = getUsersPath({ randomKey })
-  const [users] = useObjectVal(getFirebaseRef(usersRefPath))
+  const [peers] = usePeers({ randomKey })
   const [databases, setDatabases] = useState<Database[]>([])
   
   useEffect(() => {
     const asyncFunc = async () => {
-      const usersRef = getFirebaseRef(usersRefPath)
-      const usersSnapshot = await usersRef.once('value')
-      const usersValue = usersSnapshot.val()
-      if (!usersValue) {
-        usersRef.set({
+      // check if classroom exists, redirect to /hallway
+      const classroomRef = getFirebaseRef(getClassroomPath({ randomKey }))
+      const classroomValue = (await classroomRef.once('value')).val()
+      if (!classroomValue) {
+        window.alert(`Oops, classroom does not exist.`)
+        router.push('/hallway')
+        return
+      }
+      
+      // initiate "user"
+      const selfRef = getFirebaseRef(getPeerPath({ randomKey, username }))
+      const selfSnap = await selfRef.once('value')
+      const selfValue = selfSnap.val()
+      if (!selfValue) {
+        selfRef.set({
           username,
         })
       }
+      // initiate "query"
       const queriesRefPath = getQueryPath({ username, randomKey })
       const queriesRef = getFirebaseRef(queriesRefPath)
-      const queriesSnapshot = await queriesRef.once('value')
-      const queriesValue = queriesSnapshot.val()
+      const queriesSnap = await queriesRef.once('value')
+      const queriesValue = queriesSnap.val()
       if (!queriesValue) {
         queriesRef.set({
           __placeholder: username,
@@ -69,7 +79,7 @@ const Layout: React.FC = () => {
       </Head>
       <Header siteTitle={siteMetadata.title} />
       <StyledInner>
-        <StyledSidebar username={username} users={users} />
+        <StyledSidebar username={username} users={peers} />
         <main>
           <QueryPanel databases={databases} />
         </main>

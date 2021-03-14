@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import getFirebaseRef from '../libs/getFirebaseRef'
-import { CLASSROOM_PATH } from '../constants/firebasePaths'
+import { getClassroomPath } from '../libs/getClassroomFirebasePath'
 
 const useCreateClassroom = () => {
   const [error, setError] = useState<Error | undefined>(undefined)
@@ -10,7 +10,7 @@ const useCreateClassroom = () => {
 
   const create = async (randomKey: string) => {
     _clearError()
-    const classroomRef = getFirebaseRef(`${CLASSROOM_PATH}/${randomKey}`)
+    const classroomRef = getFirebaseRef(getClassroomPath({ randomKey }))
     const value = (await classroomRef.once('value')).val()
     if (value) {
       setError(new Error('Classroom already exists'))
