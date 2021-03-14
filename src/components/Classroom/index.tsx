@@ -71,7 +71,7 @@ const Layout: React.FC = () => {
       <StyledInner>
         <StyledSidebar username={username} users={users} />
         <main>
-          <Board username={username} databases={databases} />
+          <Board databases={databases} />
         </main>
       </StyledInner>
     </StyledWrapper>

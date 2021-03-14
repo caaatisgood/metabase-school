@@ -3,19 +3,20 @@ import styled from 'styled-components'
 import { queryDataset } from '../../apis/query'
 import Result from './Result'
 import Editor from './Editor'
-
-// const LazyEditor = React.lazy(() => import('./Editor'), () => '...')
+import { useRouter } from 'next/router'
+import { getQueryPath } from '../../libs/getClassroomFirebasePath'
 
 type Databases = {
   name: string
   id: string
 }
 interface Props {
-  username?: string
   databases: Databases[]
 }
 
-const Board: React.FC<Props> = ({ username, databases }) => {
+const Board: React.FC<Props> = ({ databases }) => {
+  const router = useRouter()
+  const { username, randomKey } = router.query
   const [columns, setColumns] = useState([])
   const [rows, setRows] = useState([])
   const [error, setError] = useState('')
@@ -79,7 +80,11 @@ const Board: React.FC<Props> = ({ username, databases }) => {
             <LazyEditor username={username} value={code} onChange={setCode} />
           </React.Suspense> */}
           {!!window.Firepad && editorVisible && (
-            <Editor username={username} value={code} onChange={setCode} />
+            <Editor
+              firebasePath={getQueryPath({ randomKey, username })}
+              value={code}
+              onChange={setCode}
+            />
           )}
         </div>
         <div style={{ marginTop: '0.5rem' }}>
