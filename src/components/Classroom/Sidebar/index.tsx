@@ -7,11 +7,12 @@ type Users = {
   [key: string]: User
 }
 type Props = {
+  className?: string
   username?: string
   users: Users
 }
 
-const Sidebar: React.FC<Props> = ({ username, users }) => {
+const Sidebar: React.FC<Props> = ({ className, username, users }) => {
   const self = users?.[username!]
   const mates = users && Object.entries(users).filter(([key]) => key !== username)
 
@@ -20,7 +21,7 @@ const Sidebar: React.FC<Props> = ({ username, users }) => {
   }
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       {!!self && <Tab isActive={_isActive(username)} user={self} />}
       <hr />
       {mates?.map(([key, user]) => (
@@ -31,7 +32,6 @@ const Sidebar: React.FC<Props> = ({ username, users }) => {
 }
 
 const StyledWrapper = styled.aside`
-  padding: 0 1rem 0.75rem;
   hr {
     margin: 0.75rem 0;
   }

@@ -97,7 +97,6 @@ const QueryPanel: React.FC = () => {
 }
 
 const StyledWrapper = styled.div`
-  padding-right: 1rem;
   .inner {
     padding: 0.75rem;
     border-radius: 5px;

@@ -9,7 +9,7 @@ const Header: React.FC<Props> = ({ siteTitle = '' }) => {
   return (
     <StyledHeader>
       <div className='inner'>
-        <h1 style={{ margin: 0 }}>{siteTitle}</h1>
+        <h1>{siteTitle}</h1>
       </div>
     </StyledHeader>
   )
@@ -24,6 +24,7 @@ const StyledHeader = styled.header`
   }
   color: #5b5c5b;
   h1 {
+    margin: 0;
     font-size: 2rem;
     line-height: 1;
   }

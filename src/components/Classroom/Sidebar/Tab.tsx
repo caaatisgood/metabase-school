@@ -18,7 +18,10 @@ const Tab: React.FC<Props> = ({ isActive, user }) => {
         query: {
           randomKey: router.query.randomKey,
           username: user.username,
-        }}}>{user.username}</Link>
+        }}}
+        title={user.username}>
+        {user.username}
+      </Link>
     </StyledWrapper>
   )
 }
@@ -40,6 +43,9 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
     border: 1px solid #5b5c5b;
   `}
   a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: ${({ isActive }) => (isActive ? '#ebebeb' : '#5b5c5b')};
     display: block;
     text-decoration: none;

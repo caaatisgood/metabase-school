@@ -77,14 +77,16 @@ const StyledWrapper = styled.div`
 `
 const StyledInner = styled.div`
   display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
   main {
     flex: 1;
-    max-width: calc(100vw - 200px);
   }
 `
 const StyledSidebar = styled(Sidebar)`
-  flex-basis: 200px;
-  flex-shrink: 0;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  width: 180px;
 `
 
 export default withAuth(Layout)
