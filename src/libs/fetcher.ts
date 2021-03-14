@@ -1,17 +1,8 @@
 import Cookies from './cookies'
 import { SESSION_ID_COOKIE } from '../constants/auth'
+import { Endpoint, Options, Headers } from '../types/fetcher'
 
-type Headers = {
-  [key: string]: string
-}
-type Options = {
-  headers?: Headers
-  body?: Object
-  method?: string
-  [key: string]: any
-}
-
-const fetch = (endpoint: string, options: Options) => {
+const fetcher = (endpoint: Endpoint, options: Options = {}) => {
   const { headers, body, ...restOptions } = options
   const _options: any = {
     ...restOptions,
@@ -34,4 +25,4 @@ const _generateHeaders = (headers: Headers = {}) => {
 
 const _getMetabaseSessionId = () => Cookies.get(SESSION_ID_COOKIE)
 
-export default fetch
+export default fetcher

@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import Cookies from '../libs/cookies'
-import fetch from '../libs/fetch'
+import fetcher from '../libs/fetcher'
 import { SESSION_ID_COOKIE, USERNAME_COOKIE } from '../constants/auth'
 
 type LoginParams = {
@@ -10,7 +10,7 @@ type LoginParams = {
 
 export const login = async ({ username, password }: LoginParams) => {
   try {
-    const res = await fetch(`/.netlify/functions/login/node-fetch`, {
+    const res = await fetcher(`/.netlify/functions/login/node-fetch`, {
       method: 'POST',
       body: {
         username,
@@ -34,7 +34,7 @@ export const login = async ({ username, password }: LoginParams) => {
 
 export const fetchCurrentUser = async () => {
   try {
-    const res = await fetch(`/.netlify/functions/fetchCurrentUser/node-fetch`, {
+    const res = await fetcher(`/.netlify/functions/fetchCurrentUser/node-fetch`, {
       method: 'GET',
     })
     if (!res.ok) {

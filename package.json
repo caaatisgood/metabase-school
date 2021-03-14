@@ -21,7 +21,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-firebase-hooks": "^3.0.2",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "swr": "^0.5.3"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",

@@ -6,7 +6,7 @@ const useSelf = () => {
   const [username] = useState(Cookies.get(USERNAME_COOKIE))
 
   return {
-    uesername: username || '',
+    username: username || '',
   }
 }
 

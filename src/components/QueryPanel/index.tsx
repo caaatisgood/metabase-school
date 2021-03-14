@@ -5,18 +5,13 @@ import Result from './Result'
 import Editor from './Editor'
 import { useRouter } from 'next/router'
 import { getQueryPath } from '../../libs/getClassroomFirebasePath'
+import useDatabases from '../../hooks/useDatabases'
 
-type Databases = {
-  name: string
-  id: string
-}
-interface Props {
-  databases: Databases[]
-}
-
-const QueryPanel: React.FC<Props> = ({ databases }) => {
+const QueryPanel: React.FC = () => {
   const router = useRouter()
-  const { username, randomKey } = router.query
+  const username = router.query.username as string
+  const randomKey = router.query.randomKey as string
+  const { databases } = useDatabases()
   const [columns, setColumns] = useState([])
   const [rows, setRows] = useState([])
   const [error, setError] = useState('')
@@ -76,9 +71,6 @@ const QueryPanel: React.FC<Props> = ({ databases }) => {
           </select>
         </div>
         <div className='editor-wrapper'>
-          {/* <React.Suspense fallback={'preparing editor...'}>
-            <LazyEditor username={username} value={code} onChange={setCode} />
-          </React.Suspense> */}
           {!!window.Firepad && editorVisible && (
             <Editor
               firebasePath={getQueryPath({ randomKey, username })}

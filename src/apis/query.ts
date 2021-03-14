@@ -1,6 +1,4 @@
-import { Database } from '../types/metabase'
-import fetch from '../libs/fetch'
-
+import fetcher from '../libs/fetcher'
 
 type QueryDatasetParams = {
   database: number
@@ -9,7 +7,7 @@ type QueryDatasetParams = {
 
 export const queryDataset = async ({ database, query }: QueryDatasetParams) => {
   try {
-    const res = await fetch(`/.netlify/functions/queryDataset/node-fetch`, {
+    const res = await fetcher(`/.netlify/functions/queryDataset/node-fetch`, {
       method: 'POST',
       body: {
         database,
@@ -28,21 +26,4 @@ export const queryDataset = async ({ database, query }: QueryDatasetParams) => {
   } catch (err) {
     window.alert(err)
   }
-}
-
-export const fetchDatabases = async () => {
-  let payload: Database[] = []
-  try {
-    const res = await fetch(`/.netlify/functions/fetchDatabases/node-fetch`, {
-      method: 'GET',
-    })
-    payload = await res.json()
-    if (!res.ok) {
-      window.alert(JSON.stringify(payload.errors))
-    }
-    return payload
-  } catch (err) {
-    window.alert(err)
-  }
-  return payload || []
 }

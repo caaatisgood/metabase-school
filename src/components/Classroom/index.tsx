@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
 import siteMetadata from '../../constants/siteMetadata'
 import useSelf from '../../hooks/useSelf'
-import usePeers from '../../hooks/classroom/usePeers'
+import useClassroomPeers from '../../hooks/useClassroomPeers'
 import getFirebaseRef from '../../libs/getFirebaseRef'
-import { fetchDatabases } from '../../apis/query'
 import { getClassroomPath, getPeerPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
 import QueryPanel from '../QueryPanel'
 import Sidebar from './Sidebar'
-import { Database } from '../../types/metabase'
 
 const Layout: React.FC = () => {
   const router = useRouter()
   const { username } = useSelf()
   const randomKey = router.query.randomKey as string
-  const [peers] = usePeers({ randomKey })
-  const [databases, setDatabases] = useState<Database[]>([])
+  const [peers] = useClassroomPeers({ randomKey })
   
   useEffect(() => {
     const asyncFunc = async () => {
@@ -56,19 +53,6 @@ const Layout: React.FC = () => {
     asyncFunc()
   }, [])
 
-  useEffect(() => {
-    const asyncEffect = async () => {
-      const _databases = await fetchDatabases()
-      setDatabases(
-        _databases.map(({ name, id }) => ({
-          name,
-          id,
-        })),
-      )
-    }
-    asyncEffect()
-  }, [])
-
   return (
     <StyledWrapper>
       <Head>
@@ -81,7 +65,7 @@ const Layout: React.FC = () => {
       <StyledInner>
         <StyledSidebar username={username} users={peers} />
         <main>
-          <QueryPanel databases={databases} />
+          <QueryPanel />
         </main>
       </StyledInner>
     </StyledWrapper>
