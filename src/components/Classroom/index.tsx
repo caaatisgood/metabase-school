@@ -81,12 +81,13 @@ const StyledInner = styled.div`
   padding-right: 1rem;
   main {
     flex: 1;
+    width: calc(100% - 13rem);
   }
 `
 const StyledSidebar = styled(Sidebar)`
   padding-right: 1rem;
   padding-bottom: 1rem;
-  width: 180px;
+  width: 10rem;
 `
 
 export default withAuth(Layout)
