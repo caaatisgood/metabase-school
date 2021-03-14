@@ -14,7 +14,7 @@ interface Props {
   databases: Databases[]
 }
 
-const Board: React.FC<Props> = ({ databases }) => {
+const QueryPanel: React.FC<Props> = ({ databases }) => {
   const router = useRouter()
   const { username, randomKey } = router.query
   const [columns, setColumns] = useState([])
@@ -128,4 +128,4 @@ const StyledWrapper = styled.div`
   }
 `
 
-export default Board
+export default QueryPanel

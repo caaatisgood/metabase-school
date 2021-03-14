@@ -11,7 +11,7 @@ import { fetchDatabases } from '../../apis/query'
 import { getUsersPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
-import Board from '../Board'
+import QueryPanel from '../QueryPanel'
 import Sidebar from './Sidebar'
 import { Database } from '../../types/metabase'
 
@@ -71,7 +71,7 @@ const Layout: React.FC = () => {
       <StyledInner>
         <StyledSidebar username={username} users={users} />
         <main>
-          <Board databases={databases} />
+          <QueryPanel databases={databases} />
         </main>
       </StyledInner>
     </StyledWrapper>

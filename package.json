@@ -41,7 +41,9 @@
     "*.{js,ts,tsx}": "npm run format"
   },
   "keywords": [
-    "metabase"
+    "metabase",
+    "sql-editor",
+    "learning"
   ],
   "license": "MIT",
   "repository": {
