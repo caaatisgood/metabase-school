@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import styled from 'styled-components'
-// import Firepad from 'firepad'
 import getFirebaseRef from '../../libs/getFirebaseRef'
 
 const MonacoEditor = dynamic(import('@monaco-editor/react'), { ssr: false })
@@ -12,11 +11,10 @@ const OPTIONS = {
 
 type Props = {
   firebasePath: string
-  value: string
   onChange: Function
 }
 
-const Editor: React.FC<Props> = ({ firebasePath, value, onChange }) => {
+const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
   let _editor, _firepad, _firebaseRef
 
   useEffect(() => {
@@ -34,7 +32,6 @@ const Editor: React.FC<Props> = ({ firebasePath, value, onChange }) => {
 
   const _initFirepad = () => {
     _firepad = window.Firepad.fromMonaco(_firebaseRef, _editor)
-    // _firepad = Firepad.fromMonaco(_firebaseRef, _editor)
   }
 
   const _initFirebaseRef = () => {

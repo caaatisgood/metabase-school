@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Link from '../../Link'
 import styled from 'styled-components'
-import { User } from './types'
+import { User } from '../../../types/user'
 
 type Props = {
   isActive: boolean

@@ -37,6 +37,10 @@ const QueryPanel: React.FC = () => {
     setDatabase(evt.target.value)
   }
 
+  const _onChange = (value: string) => {
+    setCode(value)
+  }
+
   const _onQuery = async () => {
     setQuerying(true)
     setError('')
@@ -74,8 +78,7 @@ const QueryPanel: React.FC = () => {
           {!!window.Firepad && editorVisible && (
             <Editor
               firebasePath={getQueryPath({ randomKey, username })}
-              value={code}
-              onChange={setCode}
+              onChange={_onChange}
             />
           )}
         </div>

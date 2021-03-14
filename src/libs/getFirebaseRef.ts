@@ -16,4 +16,6 @@ if (!initialized && window) {
   initialized = true
 }
 
-export default (ref) => firebase.database().ref(ref)
+const getFirebaseRef = (ref: string) => firebase.database().ref(ref)
+
+export default getFirebaseRef
