@@ -4,7 +4,7 @@ import Link from '../../Link'
 import styled from 'styled-components'
 import { User } from '../../../types/user'
 
-type Props = {
+interface Props {
   isActive: boolean
   user: User
 }

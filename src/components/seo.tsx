@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import siteMetadata from '../constants/siteMetadata'
 
-type Props = {
+interface Props {
   title?: string
 }
 

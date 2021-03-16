@@ -9,7 +9,7 @@ const OPTIONS = {
   tabSize: 2,
 }
 
-type Props = {
+interface Props {
   firebasePath: string
   onChange: Function
 }

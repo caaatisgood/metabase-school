@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = {
+interface Props {
   columns: string[]
   rows: string[][]
 }

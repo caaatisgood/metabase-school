@@ -1,20 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import Tab from './Tab'
-import { User, Username } from '../../../types/user'
+import { Users, Username } from '../../../types/user'
 
-type Users = {
-  [key: string]: User
-}
-type Props = {
+interface Props {
   className?: string
   username?: string
-  users: Users
+  users?: Users
 }
 
 const Sidebar: React.FC<Props> = ({ className, username, users }) => {
   const self = users?.[username!]
-  const mates = users && Object.entries(users).filter(([key]) => key !== username)
+  const peers = users && Object.entries(users).filter(([key]) => key !== username)
 
   const _isActive = (username?: Username) => {
     return window.location.pathname.indexOf(username!) > -1
@@ -24,7 +21,7 @@ const Sidebar: React.FC<Props> = ({ className, username, users }) => {
     <StyledWrapper className={className}>
       {!!self && <Tab isActive={_isActive(username)} user={self} />}
       <hr />
-      {mates?.map(([key, user]) => (
+      {peers?.map(([key, user]) => (
         <Tab isActive={_isActive(user.username)} key={key} user={user} />
       ))}
     </StyledWrapper>

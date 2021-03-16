@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import siteMetadata from '../constants/siteMetadata'
 
-type Props = {
+interface Props {
   title?: string
 }
 
