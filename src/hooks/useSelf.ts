@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import Cookies from '../libs/cookies'
-import { USERNAME_COOKIE } from '../constants/auth'
+import Storage from '../libs/storage'
+import { USERNAME_STORAGE_KEY } from '../constants/auth'
 
 const useSelf = () => {
-  const [username] = useState(Cookies.get(USERNAME_COOKIE))
+  const [username] = useState(Storage.get(USERNAME_STORAGE_KEY))
 
   return {
     username: username || '',

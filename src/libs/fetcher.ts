@@ -1,5 +1,5 @@
-import Cookies from './cookies'
-import { SESSION_ID_COOKIE } from '../constants/auth'
+import Storage from './storage'
+import { SESSION_ID_STORAGE_KEY } from '../constants/auth'
 import { Endpoint, Options, Headers } from '../types/fetcher'
 
 const fetcher = (endpoint: Endpoint, options: Options = {}) => {
@@ -23,6 +23,6 @@ const _generateHeaders = (headers: Headers = {}) => {
   return _headers
 }
 
-const _getMetabaseSessionId = () => Cookies.get(SESSION_ID_COOKIE)
+const _getMetabaseSessionId = () => Storage.get(SESSION_ID_STORAGE_KEY)
 
 export default fetcher

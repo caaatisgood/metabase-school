@@ -1,7 +1,7 @@
 import Router from 'next/router'
-import Cookies from '../libs/cookies'
+import Storage from '../libs/storage'
 import fetcher from '../libs/fetcher'
-import { SESSION_ID_COOKIE, USERNAME_COOKIE } from '../constants/auth'
+import { SESSION_ID_STORAGE_KEY, USERNAME_STORAGE_KEY } from '../constants/auth'
 
 type LoginParams = {
   username: string
@@ -24,8 +24,8 @@ export const login = async ({ username, password }: LoginParams) => {
     }
     const [rawName] = username.split('@')
     const name = rawName.replace(/\./g, '-')
-    Cookies.set(SESSION_ID_COOKIE, payload.id)
-    Cookies.set(USERNAME_COOKIE, name)
+    Storage.set(SESSION_ID_STORAGE_KEY, payload.id)
+    Storage.set(USERNAME_STORAGE_KEY, name)
     Router.push('/hallway')
   } catch (err) {
     window.alert(err)
