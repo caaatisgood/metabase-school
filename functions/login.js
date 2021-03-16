@@ -6,6 +6,7 @@ exports.handler = async function (event, context) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: event.body,
+      __reqHeaders: event.headers,
     })
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300

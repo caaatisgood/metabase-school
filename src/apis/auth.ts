@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import Storage from '../libs/storage'
 import fetcher from '../libs/fetcher'
-import { SESSION_ID_STORAGE_KEY, USERNAME_STORAGE_KEY } from '../constants/auth'
+import { SESSION_ID_STORAGE_KEY, USERNAME_STORAGE_KEY } from '../constants/storage'
 
 type LoginParams = {
   username: string

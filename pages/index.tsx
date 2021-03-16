@@ -1,20 +1,32 @@
 import React, { useEffect } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import SEO from '../src/components/seo'
 import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
 import LoginForm from '../src/components/LoginForm'
-import useSelf from '../src/hooks/useSelf'
+import useIdentity from '../src/hooks/useIdentity'
+import useCurrentUser from '../src/hooks/metabase/useCurrentUser'
 
 const IndexPage = () => {
-  const { username } = useSelf()
-
+  const { apiEndpoint, sessionId } = useIdentity()
+  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiEndpoint && sessionId))
+  const router = useRouter()
+  
+  /* identity check
+   *
+   * if api host and session id are provided:
+   *   validate session id
+   *   if valid
+   *     redirect to /hallway
+   * prompt login
+   * 
+   */
   useEffect(() => {
-    if (username) {
-      Router.push('/hallway')
+    if (currentUser && !currentUserError) {
+      router.push('/hallway')
     }
-  }, [username])
+  }, [currentUser, currentUserError])
 
   return (
     <>

@@ -5,7 +5,7 @@ import Result from './Result'
 import Editor from './Editor'
 import { useRouter } from 'next/router'
 import { getQueryPath } from '../../libs/getClassroomFirebasePath'
-import useDatabases from '../../hooks/useDatabases'
+import useDatabases from '../../hooks/metabase/useDatabases'
 
 const QueryPanel: React.FC = () => {
   const router = useRouter()

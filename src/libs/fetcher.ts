@@ -1,6 +1,7 @@
 import Storage from './storage'
-import { SESSION_ID_STORAGE_KEY } from '../constants/auth'
+import { SESSION_ID_STORAGE_KEY } from '../constants/storage'
 import { Endpoint, Options, Headers } from '../types/fetcher'
+import getMetabaseApiHost from './getMetabaseApiHost'
 
 const fetcher = (endpoint: Endpoint, options: Options = {}) => {
   const { headers, body, ...restOptions } = options
@@ -15,8 +16,11 @@ const fetcher = (endpoint: Endpoint, options: Options = {}) => {
 }
 
 const _generateHeaders = (headers: Headers = {}) => {
-  const sessionId = _getMetabaseSessionId()
-  const _headers = headers
+  const sessionId = _getMetabaseSessionId() as string
+  const _headers: Headers = {
+    ...headers,
+    'x-metabase-api-host': getMetabaseApiHost() as string,
+  }
   if (sessionId) {
     _headers['x-metabase-session'] = sessionId
   }

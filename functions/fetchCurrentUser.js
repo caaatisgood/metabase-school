@@ -1,14 +1,10 @@
 const fetcher = require('utils').metabaseFetcher
 
 exports.handler = async function (event, context) {
-  const SESSION_HEADER = 'x-metabase-session'
   try {
     const response = await fetcher(`/api/user/current`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        [SESSION_HEADER]: event.headers[SESSION_HEADER],
-      },
+      __reqHeaders: event.headers,
     })
     if (!response.ok) {
       try {

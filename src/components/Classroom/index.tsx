@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import withAuth from '../../hocs/withAuth'
 import siteMetadata from '../../constants/siteMetadata'
-import useSelf from '../../hooks/useSelf'
+import useIdentity from '../../hooks/useIdentity'
 import useClassroomPeers from '../../hooks/useClassroomPeers'
 import getFirebaseRef from '../../libs/getFirebaseRef'
 import { getClassroomPath, getPeerPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
@@ -13,11 +13,11 @@ import Header from '../header'
 import QueryPanel from '../QueryPanel'
 import Sidebar from './Sidebar'
 
-const Layout: React.FC = () => {
+const Classroom: React.FC = () => {
   const router = useRouter()
-  const { username } = useSelf()
+  const { username } = useIdentity()
   const randomKey = router.query.randomKey as string
-  const [peers] = useClassroomPeers({ randomKey })
+  const peers = useClassroomPeers({ randomKey })
 
   // console.log(peers)
   
@@ -92,4 +92,4 @@ const StyledSidebar = styled(Sidebar)`
   width: 10rem;
 `
 
-export default withAuth(Layout)
+export default withAuth(Classroom)
