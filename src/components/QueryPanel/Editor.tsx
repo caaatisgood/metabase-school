@@ -19,8 +19,8 @@ const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
 
   useEffect(() => {
     return () => {
-      _firepad.dispose()
-      _firebaseRef.off()
+      _firepad?.dispose()
+      _firebaseRef?.off()
     }
   }, [])
 
