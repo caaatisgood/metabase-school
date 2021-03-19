@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import SEO from '../src/components/seo'
@@ -7,11 +7,21 @@ import EntiresLayout from '../src/components/EntriesLayout'
 import LoginForm from '../src/components/LoginForm'
 import useIdentity from '../src/hooks/useIdentity'
 import useCurrentUser from '../src/hooks/metabase/useCurrentUser'
+import Input from '../src/components/Input'
+import config from '../src/config'
+import getMetabaseApiHost from '../src/libs/getMetabaseApiHost'
+import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 
 const IndexPage = () => {
+  const router = useRouter()
+  const { apiHost, setApiHost } = useMetabaseApiHost()
   const { apiEndpoint, sessionId } = useIdentity()
   const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiEndpoint && sessionId))
-  const router = useRouter()
+  console.log('apiHost', apiHost)
+
+  const _onChangeMetabaseHost = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setApiHost(evt.target.value)
+  }
   
   /* identity check
    *
@@ -23,7 +33,7 @@ const IndexPage = () => {
    * 
    */
   useEffect(() => {
-    if (currentUser && !currentUserError) {
+    if (apiHost && currentUser && !currentUserError) {
       router.push('/hallway')
     }
   }, [currentUser, currentUserError])
@@ -34,7 +44,23 @@ const IndexPage = () => {
       <Theme>
         <EntiresLayout>
           <StyledInnerWrapper>
-            <LoginForm />
+            {!config.metabaseApiHost && (
+              <>
+                <StyledUrlInput
+                  autoFocus
+                  type='url'
+                  placeholder='your Metabase API host'
+                  required
+                  onChange={_onChangeMetabaseHost}
+                />
+                <br />
+                <br />
+                -
+                <br />
+                <br />
+              </>
+            )}
+            <LoginForm disabled={!getMetabaseApiHost()} />
           </StyledInnerWrapper>
         </EntiresLayout>
       </Theme>
@@ -48,6 +74,10 @@ const StyledInnerWrapper = styled.div`
     font-size: 1rem;
     margin-bottom: 3rem;
   }
+`
+const StyledUrlInput = styled(Input)`
+  width: 400px;
+  max-width: 100%;
 `
 
 export default IndexPage

@@ -1,9 +1,13 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { login } from '../apis/auth'
-import Input from './HomePage/Input'
+import Input from './Input'
 
-const LoginForm: React.FC = () => {
+interface Props {
+  disabled: boolean
+}
+
+const LoginForm: React.FC<Props> = ({ disabled }) => {
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -19,11 +23,18 @@ const LoginForm: React.FC = () => {
       <Input
         ref={usernameRef}
         autoFocus
-        type='text'
+        type='email'
         placeholder='username / email'
+        disabled={disabled}
         required
-        />
-      <Input ref={passwordRef} type='password' placeholder='password' required />
+      />
+      <Input
+        ref={passwordRef}
+        type='password'
+        placeholder='password'
+        disabled={disabled}
+        required
+      />
       <input type='submit' />
     </StyledForm>
   )

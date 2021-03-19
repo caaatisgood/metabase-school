@@ -13,5 +13,7 @@ module.exports.metabaseFetcher = (path, options) => {
       [SESSION_HEADER]: __reqHeaders[SESSION_HEADER],
     }
   }
-  return fetch(`${__reqHeaders[API_HOST_HEADER]}${path}`, _options)
+  const rawHost = __reqHeaders[API_HOST_HEADER]
+  const host = rawHost.endsWith('/') ? rawHost.substring(0, rawHost.length - 1) : rawHost
+  return fetch(`${host}${path}`, _options)
 }

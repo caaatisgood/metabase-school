@@ -19,8 +19,6 @@ const Classroom: React.FC = () => {
   const randomKey = router.query.randomKey as string
   const peers = useClassroomPeers({ randomKey })
 
-  // console.log(peers)
-  
   useEffect(() => {
     const asyncFunc = async () => {
       // check if classroom exists, redirect to /hallway
