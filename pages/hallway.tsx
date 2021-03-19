@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
+import withAuth from '../src/hocs/withAuth'
 import SEO from '../src/components/seo'
 import Theme from '../src/components/Theme'
 import EntiresLayout from '../src/components/EntriesLayout'
@@ -120,4 +121,4 @@ const StyledError = styled.span`
   color: ${({ theme }) => theme.colors.error};
 `
 
-export default Hallway
+export default withAuth(Hallway)
