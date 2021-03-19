@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import SEO from '../src/components/seo'
@@ -15,9 +15,8 @@ import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 const IndexPage = () => {
   const router = useRouter()
   const { apiHost, setApiHost } = useMetabaseApiHost()
-  const { apiEndpoint, sessionId } = useIdentity()
-  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiEndpoint && sessionId))
-  console.log('apiHost', apiHost)
+  const { sessionId } = useIdentity()
+  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiHost && sessionId))
 
   const _onChangeMetabaseHost = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setApiHost(evt.target.value)
@@ -36,7 +35,7 @@ const IndexPage = () => {
     if (apiHost && currentUser && !currentUserError) {
       router.push('/hallway')
     }
-  }, [currentUser, currentUserError])
+  }, [apiHost, currentUser, currentUserError])
 
   return (
     <>

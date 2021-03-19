@@ -7,16 +7,20 @@ import EntiresLayout from '../src/components/EntriesLayout'
 import Input from '../src/components/Input'
 import generateClassroomNumber from '../src/libs/generateClassroomNumber'
 import useIdentity from '../src/hooks/useIdentity'
+import useCurrentUser from '../src/hooks/metabase/useCurrentUser'
+import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 import useCreateClassroom from '../src/hooks/useCreateClassroom'
 import useJoinClassroom from '../src/hooks/useJoinClassroom'
 
 const Hallway = () => {
+  const { apiHost } = useMetabaseApiHost()
+  const { username, sessionId } = useIdentity()
+  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiHost && sessionId))
   const router = useRouter()
   const classroomNumRef = useRef<HTMLInputElement>(null)
   const [newClassroomNum, setNewClassroomNum] = useState(generateClassroomNumber())
   const { create, error: createError, randomKey: createdRandomKey } = useCreateClassroom()
   const { join, error: joinError, randomKey: joinedRandomKey } = useJoinClassroom()
-  const { username } = useIdentity()
 
   const _joinClassroom = (evt: React.FormEvent) => {
     evt.preventDefault()
@@ -31,6 +35,20 @@ const Hallway = () => {
   const _onNewClassRoomNumChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setNewClassroomNum(evt.target.value)
   }
+
+  /* identity check
+   *
+   * if api host and session id are provided:
+   *   validate session id
+   *   if valid
+   *     stay
+   * redirect to homepage
+   */
+  useEffect(() => {
+    if (!apiHost || !currentUser || currentUserError) {
+      router.push('/')
+    }
+  }, [apiHost, currentUser, currentUserError])
 
   useEffect(() => {
     if (createdRandomKey) {
