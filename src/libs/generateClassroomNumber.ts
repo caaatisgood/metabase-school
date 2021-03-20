@@ -1,10 +1,17 @@
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+const _getRandomChar = () => {
+  return chars[~~(Math.random() * chars.length)]
+}
+
 const generateClassroomNumber = () => {
   const d = new Date()
   const month = `${d.getMonth() + 1}`.padStart(2, '0')
   const date = `${d.getDate()}`.padStart(2, '0')
-  const year = `${d.getFullYear()}`.substring(2)
-  const rand = Math.random().toString(36).substring(3, 6)
-  return `${month}${date}${year}-${rand}`
+  const randomString = Array.from({ length: 3 }).reduce((str) => {
+    return `${str}${_getRandomChar()}`
+  }, '')
+  return `${month}${date}${randomString}`
 }
 
 export default generateClassroomNumber

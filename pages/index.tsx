@@ -8,13 +8,14 @@ import LoginForm from '../src/components/LoginForm'
 import useIdentity from '../src/hooks/useIdentity'
 import useCurrentUser from '../src/hooks/metabase/useCurrentUser'
 import Input from '../src/components/Input'
-import config from '../src/config'
 import getMetabaseApiHost from '../src/libs/getMetabaseApiHost'
+import isApiHostPreconfigured from '../src/libs/isApiHostPreconfigured'
+import cleanApiHost from '../src/libs/cleanApiHost'
 import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 
 const IndexPage = () => {
   const router = useRouter()
-  const { apiHost, setApiHost } = useMetabaseApiHost()
+  const { apiHost, update: setApiHost } = useMetabaseApiHost()
   const { sessionId } = useIdentity()
   const { data: currentUser, error: currentUserError } = useCurrentUser(
     !!(apiHost && sessionId),
@@ -22,6 +23,10 @@ const IndexPage = () => {
 
   const _onChangeMetabaseHost = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setApiHost(evt.target.value)
+  }
+
+  const _onLogin = () => {
+    setApiHost(cleanApiHost(apiHost))
   }
 
   /* identity check
@@ -45,7 +50,7 @@ const IndexPage = () => {
       <Theme>
         <EntiresLayout>
           <StyledInnerWrapper>
-            {!config.metabaseApiHost && (
+            {!isApiHostPreconfigured() && (
               <>
                 <StyledUrlInput
                   autoFocus
@@ -61,7 +66,7 @@ const IndexPage = () => {
                 <br />
               </>
             )}
-            <LoginForm disabled={!getMetabaseApiHost()} />
+            <LoginForm disabled={!getMetabaseApiHost()} onLogin={_onLogin} />
           </StyledInnerWrapper>
         </EntiresLayout>
       </Theme>

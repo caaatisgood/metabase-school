@@ -5,21 +5,25 @@ import Input from './Input'
 
 interface Props {
   disabled: boolean
+  onLogin?: Function
 }
 
-const LoginForm: React.FC<Props> = ({ disabled }) => {
+const LoginForm: React.FC<Props> = ({ disabled, onLogin }) => {
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const onSubmit = (evt: React.FormEvent) => {
+  const _onSubmit = (evt: React.FormEvent) => {
     evt.preventDefault()
     const username = usernameRef?.current?.value || ''
     const password = passwordRef?.current?.value || ''
     login({ username, password })
+    if (onLogin) {
+      onLogin()
+    }
   }
 
   return (
-    <StyledForm onSubmit={onSubmit}>
+    <StyledForm onSubmit={_onSubmit}>
       <Input
         ref={usernameRef}
         autoFocus

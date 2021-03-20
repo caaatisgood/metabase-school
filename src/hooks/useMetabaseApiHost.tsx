@@ -6,14 +6,14 @@ import getMetabaseApiHost from '../libs/getMetabaseApiHost'
 const useMetabaseApiHost = () => {
   const [, rerender] = useState<any>(null)
 
-  const setApiHost = (apiHost: string) => {
+  const update = (apiHost: string) => {
     Storage.set(API_HOST_STORAGE_KEY, apiHost)
     rerender({})
   }
 
   return {
     apiHost: getMetabaseApiHost(),
-    setApiHost,
+    update,
   }
 }
 

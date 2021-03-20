@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import firebase from 'firebase/app'
 import styled from 'styled-components'
 import getFirebaseRef from '../../libs/getFirebaseRef'
-import { MonacoEditor } from '../../types/monacoEditor'
+import * as monacoEditorTypes from '../../types/monacoEditor'
 
 const MonacoEditor = dynamic(import('@monaco-editor/react'), { ssr: false })
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
-  let _editor: MonacoEditor
+  let _editor: monacoEditorTypes.MonacoEditor
   let _firebaseRef: firebase.database.Reference
   // @ts-ignore
   let _firepad
@@ -30,7 +30,7 @@ const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
     }
   }, [])
 
-  const _editorOnMount = (editor: MonacoEditor) => {
+  const _editorOnMount = (editor: monacoEditorTypes.MonacoEditor) => {
     _editor = editor
     _initFirebaseRef()
     _initFirepad()

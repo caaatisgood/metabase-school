@@ -5,6 +5,7 @@ exports.handler = async function (event, context) {
   try {
     const response = await fetcher(`/api/dataset`, {
       method: 'POST',
+      __reqHeaders: event.headers,
       headers: {
         'Content-Type': 'application/json',
         [SESSION_HEADER]: event.headers[SESSION_HEADER],
