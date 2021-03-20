@@ -1,6 +1,6 @@
 interface Database {
-  name: string,
-  id: number,
+  name: string
+  id: number
 }
 
-export interface Databases extends Array<Database>{}
+export interface Databases extends Array<Database> {}

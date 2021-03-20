@@ -5,7 +5,7 @@ const Page = () => {
   if (typeof window === undefined) {
     return null
   }
-  
+
   return <Classroom />
 }
 

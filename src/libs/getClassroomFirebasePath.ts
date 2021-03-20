@@ -9,16 +9,16 @@ export const getPeersPath = ({ randomKey }: { randomKey: string }) => {
 }
 
 type GetPeerPath = {
-  username: string,
-  randomKey: string,
+  username: string
+  randomKey: string
 }
 export const getPeerPath = ({ randomKey, username }: GetPeerPath) => {
   return `${getPeersPath({ randomKey })}/${username}`
 }
 
 type GetQueryPath = {
-  username: string,
-  randomKey: string,
+  username: string
+  randomKey: string
 }
 export const getQueryPath = ({ username, randomKey }: GetQueryPath) => {
   return `${CLASSROOM_PATH}/${randomKey}/queries/${username}`

@@ -16,12 +16,14 @@ const IndexPage = () => {
   const router = useRouter()
   const { apiHost, setApiHost } = useMetabaseApiHost()
   const { sessionId } = useIdentity()
-  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiHost && sessionId))
+  const { data: currentUser, error: currentUserError } = useCurrentUser(
+    !!(apiHost && sessionId),
+  )
 
   const _onChangeMetabaseHost = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setApiHost(evt.target.value)
   }
-  
+
   /* identity check
    *
    * if api host and session id are provided:
@@ -29,7 +31,7 @@ const IndexPage = () => {
    *   if valid
    *     redirect to /hallway
    * prompt login
-   * 
+   *
    */
   useEffect(() => {
     if (apiHost && currentUser && !currentUserError) {

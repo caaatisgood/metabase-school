@@ -16,7 +16,9 @@ import useJoinClassroom from '../src/hooks/useJoinClassroom'
 const Hallway = () => {
   const { apiHost } = useMetabaseApiHost()
   const { username, sessionId } = useIdentity()
-  const { data: currentUser, error: currentUserError } = useCurrentUser(!!(apiHost && sessionId))
+  const { data: currentUser, error: currentUserError } = useCurrentUser(
+    !!(apiHost && sessionId),
+  )
   const router = useRouter()
   const classroomNumRef = useRef<HTMLInputElement>(null)
   const [newClassroomNum, setNewClassroomNum] = useState(generateClassroomNumber())
@@ -80,9 +82,7 @@ const Hallway = () => {
                 required
               />
             </StyledLabel>
-            <StyledError>
-              {joinError?.message}&nbsp;
-            </StyledError>
+            <StyledError>{joinError?.message}&nbsp;</StyledError>
           </form>
           <StyledDivider>or</StyledDivider>
           <form onSubmit={_createClassroom}>
@@ -97,9 +97,7 @@ const Hallway = () => {
                 required
               />
             </StyledLabel>
-            <StyledError>
-              {createError?.message}&nbsp;
-            </StyledError>
+            <StyledError>{createError?.message}&nbsp;</StyledError>
           </form>
         </EntiresLayout>
       </Theme>

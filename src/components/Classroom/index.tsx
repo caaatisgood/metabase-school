@@ -7,7 +7,11 @@ import siteMetadata from '../../constants/siteMetadata'
 import useIdentity from '../../hooks/useIdentity'
 import useClassroomPeers from '../../hooks/useClassroomPeers'
 import getFirebaseRef from '../../libs/getFirebaseRef'
-import { getClassroomPath, getPeerPath, getQueryPath } from '../../libs/getClassroomFirebasePath'
+import {
+  getClassroomPath,
+  getPeerPath,
+  getQueryPath,
+} from '../../libs/getClassroomFirebasePath'
 
 import Header from '../header'
 import QueryPanel from '../QueryPanel'
@@ -29,7 +33,7 @@ const Classroom: React.FC = () => {
         router.push('/hallway')
         return
       }
-      
+
       // initiate "user"
       const selfRef = getFirebaseRef(getPeerPath({ randomKey, username }))
       const selfSnap = await selfRef.once('value')

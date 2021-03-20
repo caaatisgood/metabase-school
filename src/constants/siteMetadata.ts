@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: 'Metabase School'
+  title: 'Metabase School',
 }
 
 export default siteMetadata

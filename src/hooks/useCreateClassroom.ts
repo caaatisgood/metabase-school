@@ -17,7 +17,7 @@ const useCreateClassroom = () => {
       return
     }
     classroomRef.set({
-      __placeholder: '__placeholder'
+      __placeholder: '__placeholder',
     })
     setRandomKey(randomKey)
   }

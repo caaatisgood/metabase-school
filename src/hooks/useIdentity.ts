@@ -3,8 +3,8 @@ import Storage from '../libs/storage'
 import { USERNAME_STORAGE_KEY, SESSION_ID_STORAGE_KEY } from '../constants/storage'
 
 type Identity = {
-  username?: string | null,
-  sessionId?: string | null,
+  username?: string | null
+  sessionId?: string | null
 }
 
 const useIdentity = () => {

@@ -6,7 +6,7 @@ const useDatabases = () => {
   const { data } = useSWR(`/.netlify/functions/fetchDatabases/node-fetch`, fetcher)
   const databases: Databases = data || []
   return {
-    databases
+    databases,
   }
 }
 

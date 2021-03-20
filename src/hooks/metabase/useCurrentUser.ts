@@ -4,7 +4,7 @@ import fetcher from '../../libs/swrFetcher'
 const useCurrentUser = (shouldFetch: boolean = true) => {
   return useSWR(
     shouldFetch ? `/.netlify/functions/fetchCurrentUser/node-fetch` : null,
-    fetcher
+    fetcher,
   )
 }
 

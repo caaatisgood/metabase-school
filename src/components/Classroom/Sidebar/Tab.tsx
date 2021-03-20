@@ -13,13 +13,16 @@ const Tab: React.FC<Props> = ({ isActive, user }) => {
   const router = useRouter()
   return (
     <StyledWrapper isActive={isActive}>
-      <Link href={{
-        pathname: router.pathname,
-        query: {
-          randomKey: router.query.randomKey,
-          username: user.username,
-        }}}
-        title={user.username}>
+      <Link
+        href={{
+          pathname: router.pathname,
+          query: {
+            randomKey: router.query.randomKey,
+            username: user.username,
+          },
+        }}
+        title={user.username}
+      >
         {user.username}
       </Link>
     </StyledWrapper>
