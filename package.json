@@ -1,6 +1,6 @@
 {
   "name": "metabase-school",
-  "description": "A query sharing tool built to help learning SQL",
+  "description": "A Metabase-integrated, collaborative tool for writing SQL.",
   "version": "0.1.0",
   "author": "Haoping Wang",
   "scripts": {
