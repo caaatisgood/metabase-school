@@ -13,7 +13,7 @@ const OPTIONS = {
 
 interface Props {
   firebasePath: string
-  onChange: () => void
+  onChange: monacoEditorTypes.OnChange
 }
 
 const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
@@ -37,6 +37,7 @@ const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
   }
 
   const _initFirepad = () => {
+    // @ts-ignore
     _firepad = window.Firepad.fromMonaco(_firebaseRef, _editor)
   }
 
