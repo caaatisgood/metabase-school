@@ -11,6 +11,9 @@
     "lint-staged": "lint-staged",
     "type-check": "tsc"
   },
+  "engines": {
+    "node": ">= 12"
+  },
   "dependencies": {
     "@monaco-editor/react": "^4.0.11",
     "firebase": "^8.2.10",
