@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
 import Storage from '../libs/storage'
 import { USERNAME_STORAGE_KEY, SESSION_ID_STORAGE_KEY } from '../constants/storage'
 
@@ -12,10 +13,20 @@ const useIdentity = () => {
     username: Storage.get(USERNAME_STORAGE_KEY),
     sessionId: Storage.get(SESSION_ID_STORAGE_KEY),
   })
+  const router = useRouter()
+
+  const logout = useCallback(() => {
+    if (window.confirm('Please confirm to logout')) {
+      Storage.remove(USERNAME_STORAGE_KEY)
+      Storage.remove(SESSION_ID_STORAGE_KEY)
+      router.push('/')
+    }
+  }, [])
 
   return {
     username: state.username || '',
     sessionId: state.sessionId,
+    logout,
   }
 }
 

@@ -15,7 +15,7 @@ import {
 } from '../../libs/getClassroomFirebasePath'
 import isApiHostPreconfigured from '../../libs/isApiHostPreconfigured'
 
-import Header from '../header'
+import Header from '../Header'
 import QueryPanel from '../QueryPanel'
 import Sidebar from './Sidebar'
 

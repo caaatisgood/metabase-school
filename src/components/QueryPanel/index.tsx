@@ -6,6 +6,7 @@ import Editor from './Editor'
 import { useRouter } from 'next/router'
 import { getQueryPath } from '../../libs/getClassroomFirebasePath'
 import useDatabases from '../../hooks/metabase/useDatabases'
+import Button from '../Button'
 
 const DATABASE_PLACEHOLDER = 'placeholder'
 
@@ -107,13 +108,13 @@ const QueryPanel: React.FC = () => {
           )}
         </div>
         <div style={{ marginTop: '0.5rem' }}>
-          <button
+          <Button
             className='query-btn'
             onClick={_onAttemptToQuery}
             disabled={!ableToQuery}
           >
             {querying ? 'Querying' : 'Query'}
-          </button>
+          </Button>
           &nbsp;
           {ableToQuery && <small>⌘ + Enter</small>}
         </div>

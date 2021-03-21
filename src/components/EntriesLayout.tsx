@@ -1,12 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import siteMetadata from '../constants/siteMetadata'
+import useIdentity from '../hooks/useIdentity'
+import Button from './Button'
 
 interface Props {
   title?: string
 }
 
 const EntiresLayout: React.FC<Props> = ({ title, children }) => {
+  const { sessionId, logout } = useIdentity()
   return (
     <StyledWrapper>
       <StyledTitleWrapper hasSubtitle={!!title}>
@@ -17,6 +20,11 @@ const EntiresLayout: React.FC<Props> = ({ title, children }) => {
           </>
         ) : (
           <h1>{siteMetadata.title}</h1>
+        )}
+        {sessionId && (
+          <Button size='small' onClick={logout}>
+            Logout
+          </Button>
         )}
       </StyledTitleWrapper>
       <StyledChildrenWrapper>{children}</StyledChildrenWrapper>
