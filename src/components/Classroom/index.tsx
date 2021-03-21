@@ -6,12 +6,14 @@ import withAuth from '../../hocs/withAuth'
 import siteMetadata from '../../constants/siteMetadata'
 import useIdentity from '../../hooks/useIdentity'
 import useClassroomPeers from '../../hooks/useClassroomPeers'
+import useMetabaseApiHost from '../../hooks/useMetabaseApiHost'
 import getFirebaseRef from '../../libs/getFirebaseRef'
 import {
   getClassroomPath,
   getPeerPath,
   getQueryPath,
 } from '../../libs/getClassroomFirebasePath'
+import isApiHostPreconfigured from '../../libs/isApiHostPreconfigured'
 
 import Header from '../header'
 import QueryPanel from '../QueryPanel'
@@ -22,6 +24,7 @@ const Classroom: React.FC = () => {
   const { username } = useIdentity()
   const randomKey = router.query.randomKey as string
   const peers = useClassroomPeers({ randomKey })
+  const { apiHost } = useMetabaseApiHost()
 
   useEffect(() => {
     const asyncFunc = async () => {
@@ -30,6 +33,13 @@ const Classroom: React.FC = () => {
       const classroomValue = (await classroomRef.once('value')).val()
       if (!classroomValue) {
         window.alert(`Oops, classroom does not exist.`)
+        router.push('/hallway')
+        return
+      }
+
+      // validate API host
+      if (!isApiHostPreconfigured() && classroomValue.apiHost !== apiHost) {
+        window.alert(`Incorrect API host.`)
         router.push('/hallway')
         return
       }
