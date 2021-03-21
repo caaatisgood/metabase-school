@@ -2,3 +2,6 @@
   command = "npm i"
   functions = "functions/"
   publish = "public/"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
