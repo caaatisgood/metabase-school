@@ -14,9 +14,10 @@ const OPTIONS = {
 interface Props {
   firebasePath: string
   onChange: monacoEditorTypes.OnChange
+  onCmdEnter?: Function
 }
 
-const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
+const Editor: React.FC<Props> = ({ firebasePath, onChange, onCmdEnter }) => {
   let _editor: monacoEditorTypes.MonacoEditor
   let _firebaseRef: firebase.database.Reference
   // @ts-ignore
@@ -32,6 +33,13 @@ const Editor: React.FC<Props> = ({ firebasePath, onChange }) => {
 
   const _editorOnMount = (editor: monacoEditorTypes.MonacoEditor) => {
     _editor = editor
+    _editor.onKeyDown((evt) => {
+      const { metaKey, ctrlKey, code } = evt
+      if ((metaKey || ctrlKey) && code === 'Enter') {
+        evt.preventDefault()
+        onCmdEnter?.()
+      }
+    })
     _initFirebaseRef()
     _initFirepad()
   }

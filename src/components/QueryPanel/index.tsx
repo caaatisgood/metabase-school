@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { getQueryPath } from '../../libs/getClassroomFirebasePath'
 import useDatabases from '../../hooks/metabase/useDatabases'
 
+const DATABASE_PLACEHOLDER = 'placeholder'
+
 const QueryPanel: React.FC = () => {
   const router = useRouter()
   const username = router.query.username as string
@@ -15,40 +17,58 @@ const QueryPanel: React.FC = () => {
   const [columns, setColumns] = useState([])
   const [rows, setRows] = useState([])
   const [error, setError] = useState('')
-  const [code, setCode] = useState('')
-  const [database, setDatabase] = useState('placeholder')
+  const [code, setCode] = useState({ value: '' })
+  const [database, setDatabase] = useState({ value: DATABASE_PLACEHOLDER })
+  const rerender = useState({})[1]
   const [editorVisible, setEditorVisibility] = useState(true)
   const [querying, setQuerying] = useState(false)
 
   useEffect(() => {
     if (username) {
       setEditorVisibility(false)
-      setCode('')
+      setCode({ value: '' })
       setColumns([])
       setRows([])
       setError('')
       setTimeout(() => {
         setEditorVisibility(true)
-      }, 200)
+      }, 0)
     }
   }, [username])
 
   const _selectDatabase = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-    setDatabase(evt.target.value)
+    // To avoid bumping into stale closure problem when using `onKeyDown` callback
+    // (monaco), used to support "query by hitting command + enter". We need to
+    // prevent the object `database` reference from being changed when we update
+    // them.
+    database.value = evt.target.value
+    setDatabase(database)
+    // Manually rerenders to reflect the update on UI.
+    rerender({})
   }
 
   const _onChange = (value?: string) => {
-    setCode(value || '')
+    // Same "prevent reference from being changed on update" approach to avoid
+    // stale closure problem.
+    code.value = value || ''
+    setCode(code)
   }
 
-  const _onQuery = async () => {
+  const _onAttemptToQuery = () => {
+    if (!code.value || !database.value || database.value === DATABASE_PLACEHOLDER) {
+      return
+    }
+    _query()
+  }
+
+  const _query = async () => {
     setQuerying(true)
     setError('')
     setColumns([])
     setRows([])
     const result = await queryDataset({
-      database: Number(database),
-      query: code.replace(/\n/g, '\t'),
+      database: Number(database.value),
+      query: code.value,
     })
     setQuerying(false)
     if (!result || result.status === 'failed') {
@@ -59,12 +79,14 @@ const QueryPanel: React.FC = () => {
     setRows(result.data.rows)
   }
 
+  const ableToQuery = !querying && database.value !== DATABASE_PLACEHOLDER
+
   return (
     <StyledWrapper>
       <div className='inner'>
         <div style={{ marginBottom: '0.5rem' }}>
-          <select onChange={_selectDatabase} value={database}>
-            <option value='placeholder' disabled>
+          <select onChange={_selectDatabase} value={database.value}>
+            <option value={DATABASE_PLACEHOLDER} disabled>
               select database
             </option>
             {databases.map(({ name, id }) => (
@@ -80,17 +102,20 @@ const QueryPanel: React.FC = () => {
             <Editor
               firebasePath={getQueryPath({ randomKey, username })}
               onChange={_onChange}
+              onCmdEnter={_onAttemptToQuery}
             />
           )}
         </div>
         <div style={{ marginTop: '0.5rem' }}>
           <button
             className='query-btn'
-            onClick={_onQuery}
-            disabled={querying || database === 'placeholder'}
+            onClick={_onAttemptToQuery}
+            disabled={!ableToQuery}
           >
             {querying ? 'Querying' : 'Query'}
           </button>
+          &nbsp;
+          {ableToQuery && <small>⌘ + Enter</small>}
         </div>
         <div className='result'>
           {error ? error : <Result columns={columns} rows={rows} />}
