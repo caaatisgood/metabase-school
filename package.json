@@ -5,7 +5,9 @@
   "author": "Haoping Wang",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "npm run build:next && npm run build:functions",
+    "build:next": "next build",
+    "build:functions": "npx zip-it-and-ship-it ./functions ./functions-dist",
     "start": "next start",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "type-check": "tsc --noEmit"
@@ -15,6 +17,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.0.11",
+    "@netlify/zip-it-and-ship-it": "^3.0.1",
     "firebase": "^8.2.10",
     "monaco-editor": "^0.23.0",
     "next": "latest",

@@ -1,4 +1,4 @@
-const fetcher = require('utils').metabaseFetcher
+const fetcher = require('./utils').metabaseFetcher
 
 exports.handler = async function (event, context) {
   const SESSION_HEADER = 'x-metabase-session'
