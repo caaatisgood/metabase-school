@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const SESSION_HEADER = 'x-metabase-session'
 const API_HOST_HEADER = 'x-metabase-api-host'
 
-module.exports.metabaseFetcher = (path, options) => {
+module.exports = (path, options) => {
   const { __reqHeaders, ..._options } = options
   _options.method = _options.method || 'get'
   if (_options.method.toLowerCase() === 'get') {
