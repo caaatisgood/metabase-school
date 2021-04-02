@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import firebase from '../libs/firebase/init'
 import { useRouter } from 'next/router'
 import Storage from '../libs/storage'
 import { USERNAME_STORAGE_KEY, SESSION_ID_STORAGE_KEY } from '../constants/storage'
@@ -15,10 +16,11 @@ const useIdentity = () => {
   })
   const router = useRouter()
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
     if (window.confirm('Please confirm to logout')) {
       Storage.remove(USERNAME_STORAGE_KEY)
       Storage.remove(SESSION_ID_STORAGE_KEY)
+      await firebase.auth().signOut()
       router.push('/')
     }
   }, [])

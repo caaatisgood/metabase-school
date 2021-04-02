@@ -2,6 +2,7 @@ import Router from 'next/router'
 import Storage from '../libs/storage'
 import fetcher from '../libs/fetcher'
 import { SESSION_ID_STORAGE_KEY, USERNAME_STORAGE_KEY } from '../constants/storage'
+import { signIn } from '../libs/firebase/auth'
 
 type LoginParams = {
   username: string
@@ -26,6 +27,7 @@ export const login = async ({ username, password }: LoginParams) => {
     const name = rawName.replace(/\./g, '-')
     Storage.set(SESSION_ID_STORAGE_KEY, payload.id)
     Storage.set(USERNAME_STORAGE_KEY, name)
+    await signIn(payload.fbToken)
     Router.push('/hallway')
   } catch (err) {
     window.alert(err)

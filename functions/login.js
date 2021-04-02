@@ -1,4 +1,5 @@
 const fetcher = require('./utils/metabaseFetcher')
+const firebase = require('./utils/firebase')
 
 exports.handler = async function (event, context) {
   try {
@@ -20,10 +21,14 @@ exports.handler = async function (event, context) {
       }
     }
     const data = await response.json()
+    const firebaseToken = await firebase.createToken()
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ id: data.id }),
+      body: JSON.stringify({
+        id: data.id,
+        fbToken: firebaseToken,
+      }),
     }
   } catch (err) {
     console.log(err) // output to netlify function log

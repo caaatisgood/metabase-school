@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const cleanApiHost = require('./cleanApiHost')
 
 const SESSION_HEADER = 'x-metabase-session'
 const API_HOST_HEADER = 'x-metabase-api-host'
@@ -13,7 +14,6 @@ module.exports = (path, options) => {
       [SESSION_HEADER]: __reqHeaders[SESSION_HEADER],
     }
   }
-  const rawHost = __reqHeaders[API_HOST_HEADER]
-  const host = rawHost.endsWith('/') ? rawHost.substring(0, rawHost.length - 1) : rawHost
+  const host = cleanApiHost(__reqHeaders[API_HOST_HEADER])
   return fetch(`${host}${path}`, _options)
 }
