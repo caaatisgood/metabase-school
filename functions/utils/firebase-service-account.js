@@ -1,6 +1,6 @@
 module.exports = {
   type: process.env.FB_SERVICE_ACCOUNT_TYPE,
-  project_id: process.env.FB_SERVICE_ACCOUNT_PROEJCT_ID,
+  project_id: process.env.FB_SERVICE_ACCOUNT_PROJECT_ID,
   private_key_id: process.env.FB_SERVICE_ACCOUNT_PRIVATE_KEY_ID,
   private_key: process.env.FB_SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/gm, '\n'),
   client_email: process.env.FB_SERVICE_ACCOUNT_CLIENT_EMAIL,

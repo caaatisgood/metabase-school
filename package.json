@@ -2,7 +2,7 @@
   "name": "metabase-school",
   "description": "A Metabase-integrated, collaborative tool for writing SQL.",
   "version": "0.1.0",
-  "author": "Haoping Wang",
+  "author": "Haoping",
   "scripts": {
     "dev": "next",
     "build": "npm run build:next && npm run build:functions",
