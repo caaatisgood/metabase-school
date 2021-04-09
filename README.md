@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Almost a year ago (around Jan, 2020), some folks in our company who are good at writing SQL, decided to start an entry-level SQL class for everyone. We had a few classes where everyone will listen to the SQL experts, and then go to one of our frequently used querying tool - Redash, for practice. That's how "SQL master class" started. Everything happened in the same meeting room, face to face, like a computer class in college.
+Almost a year ago (around Jan, 2020), some folks in our company, [Arc](https://arc.dev) & [Codementor](https://www.codementor.io/), who are good at writing SQL, decided to start an entry-level SQL class for everyone. We had a few classes where everyone will listen to the SQL experts, and then go to one of our frequently used querying tool - Redash, for practice. That's how "SQL master class" started. Everything happened in the same meeting room, face to face, like a computer class in college.
 
 Then COVID-19 hits. The fully remote working policy develops. We immediately found it difficult to sustain the "SQL master class" remotely. Because, among the remote meeting tools we used at that time (a.k.a., Zoom or Google Meet), none of them enable the SQL experts to understand everyone's learning status at any time like the way it worked in non-remote circumstance. Any colleges who may struggle with getting the query right, won't be able to get immediate help because there're much more barriers to share queries with one another.
 
@@ -28,7 +28,7 @@ That's why "Metabase School" comes into play. It's **a realtime collaborative ed
 
 ### Self-hosting
 
-Metabase School uses Netlify & Netlify Functions to host the site itself and provide APIs that interact with your Metabase API.
+Metabase School uses [Netlify](https://www.netlify.com/) & [Netlify Functions](https://www.netlify.com/products/functions/) to host the site itself and provide APIs that interact with your Metabase API.
 
 As to the collaborative code editor, it leveraged Firebase Realtime Database to make it work.
 
@@ -80,15 +80,13 @@ NEXT_PUBLIC_FIREBASE_DATABASE_URL=<YOUR_FIREBASE_DATABASE_URL>
 NEXT_PUBLIC_METABASE_API_HOST=<YOUR_METABASE_API_HOST>
 ```
 - Visit your Netlify app
-- Login with the exact credential you used for your Metabase
-- You're good to go
+- Login with the exact credential you used for your Metabase, and you're go to go!
 
 ### Not to self-host
 
 - Go to https://metabase-school.netlify.app/
 - Put in your Metabase API host
-- Login with the exact credential you used for your Metabase
-- You're good to go
+- Login with the exact credential you used for your Metabase, and you're go to go!
 
 
 ## Development
@@ -111,5 +109,5 @@ npm i -g netlify-cli
 ### Start developing
 
 ```sh
-npm run dev
+ntl dev
 ```
