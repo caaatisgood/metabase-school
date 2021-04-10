@@ -5,11 +5,12 @@ import styled from 'styled-components'
 import { User } from '../../../types/user'
 
 interface Props {
+  censored?: boolean
   isActive: boolean
   user: User
 }
 
-const Tab: React.FC<Props> = ({ isActive, user }) => {
+const Tab: React.FC<Props> = ({ censored = false, isActive, user }) => {
   const router = useRouter()
   return (
     <StyledWrapper isActive={isActive}>
@@ -23,7 +24,7 @@ const Tab: React.FC<Props> = ({ isActive, user }) => {
         }}
         title={user.username}
       >
-        {user.username}
+        {censored ? user.username.replace(/(?<!^).(?!$)/g, '*') : user.username}
       </Link>
     </StyledWrapper>
   )

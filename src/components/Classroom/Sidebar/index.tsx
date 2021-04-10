@@ -22,7 +22,7 @@ const Sidebar: React.FC<Props> = ({ className, username, users }) => {
       {!!self && <Tab isActive={_isActive(username)} user={self} />}
       <hr />
       {peers?.map(([key, user]) => (
-        <Tab isActive={_isActive(user.username)} key={key} user={user} />
+        <Tab censored isActive={_isActive(user.username)} key={key} user={user} />
       ))}
     </StyledWrapper>
   )

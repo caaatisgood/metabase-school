@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import SEO from '../src/components/seo'
@@ -14,6 +14,7 @@ import cleanApiHost from '../src/utils/cleanApiHost'
 import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 
 const IndexPage = () => {
+  const [hiddenApiInput, setHiddenApiInput] = useState(false)
   const router = useRouter()
   const { apiHost, update: setApiHost } = useMetabaseApiHost()
   const { sessionId } = useIdentity()
@@ -54,15 +55,19 @@ const IndexPage = () => {
               <>
                 <StyledUrlInput
                   autoFocus
-                  type='url'
+                  type={hiddenApiInput ? 'password' : 'url'}
                   placeholder='your Metabase API host'
                   required
                   onChange={_onChangeMetabaseHost}
                 />
                 <br />
                 <br />
-                -
-                <br />
+                <span
+                  style={{ display: 'block' }}
+                  onClick={() => setHiddenApiInput(!hiddenApiInput)}
+                >
+                  -
+                </span>
                 <br />
               </>
             )}

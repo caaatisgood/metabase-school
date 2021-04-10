@@ -92,7 +92,7 @@ const QueryPanel: React.FC = () => {
             </option>
             {databases.map(({ name, id }) => (
               <option key={id} value={id}>
-                {name}
+                {name.replace(/(?<!^).(?!$)/g, '*')}
               </option>
             ))}
           </select>
