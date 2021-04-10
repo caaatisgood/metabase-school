@@ -7,13 +7,13 @@ import siteMetadata from '../../constants/siteMetadata'
 import useIdentity from '../../hooks/useIdentity'
 import useClassroomPeers from '../../hooks/useClassroomPeers'
 import useMetabaseApiHost from '../../hooks/useMetabaseApiHost'
-import getFirebaseRef from '../../libs/getFirebaseRef'
+import getFirebaseRef from '../../utils/getFirebaseRef'
 import {
   getClassroomPath,
   getPeerPath,
   getQueryPath,
-} from '../../libs/getClassroomFirebasePath'
-import isApiHostPreconfigured from '../../libs/isApiHostPreconfigured'
+} from '../../utils/getClassroomFirebasePath'
+import isApiHostPreconfigured from '../../utils/isApiHostPreconfigured'
 
 import Header from '../Header'
 import QueryPanel from '../QueryPanel'

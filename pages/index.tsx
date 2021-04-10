@@ -8,9 +8,9 @@ import LoginForm from '../src/components/LoginForm'
 import useIdentity from '../src/hooks/useIdentity'
 import useCurrentUser from '../src/hooks/metabase/useCurrentUser'
 import Input from '../src/components/Input'
-import getMetabaseApiHost from '../src/libs/getMetabaseApiHost'
-import isApiHostPreconfigured from '../src/libs/isApiHostPreconfigured'
-import cleanApiHost from '../src/libs/cleanApiHost'
+import getMetabaseApiHost from '../src/utils/getMetabaseApiHost'
+import isApiHostPreconfigured from '../src/utils/isApiHostPreconfigured'
+import cleanApiHost from '../src/utils/cleanApiHost'
 import useMetabaseApiHost from '../src/hooks/useMetabaseApiHost'
 
 const IndexPage = () => {

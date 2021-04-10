@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import fetcher from '../../libs/swrFetcher'
+import fetcher from '../../utils/swrFetcher'
 
 const useCurrentUser = (shouldFetch: boolean = true) => {
   return useSWR(

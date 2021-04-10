@@ -1,4 +1,4 @@
-import fetcher from '../libs/fetcher'
+import fetcher from '../utils/fetcher'
 
 type QueryDatasetParams = {
   database: number

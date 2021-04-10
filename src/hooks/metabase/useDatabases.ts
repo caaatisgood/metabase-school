@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { Databases } from '../../types/metabase'
-import fetcher from '../../libs/swrFetcher'
+import fetcher from '../../utils/swrFetcher'
 
 const useDatabases = () => {
   const { data } = useSWR(`/.netlify/functions/fetchDatabases/node-fetch`, fetcher)

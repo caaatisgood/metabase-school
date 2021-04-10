@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Storage from '../libs/storage'
+import Storage from '../utils/storage'
 import { API_HOST_STORAGE_KEY } from '../constants/storage'
-import getMetabaseApiHost from '../libs/getMetabaseApiHost'
+import getMetabaseApiHost from '../utils/getMetabaseApiHost'
 
 const useMetabaseApiHost = () => {
   const [, rerender] = useState<any>(null)

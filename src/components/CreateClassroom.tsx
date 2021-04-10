@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Input from '../components/Input'
 import Label from '../components/Input/Label'
 import ErrorText from '../components/Input/ErrorText'
-import generateClassroomNumber from '../libs/generateClassroomNumber'
+import generateClassroomNumber from '../utils/generateClassroomNumber'
 import useIdentity from '../hooks/useIdentity'
 import useCreateClassroom from '../hooks/useCreateClassroom'
 

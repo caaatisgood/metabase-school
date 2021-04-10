@@ -4,7 +4,7 @@ import { queryDataset } from '../../apis/query'
 import Result from './Result'
 import Editor from './Editor'
 import { useRouter } from 'next/router'
-import { getQueryPath } from '../../libs/getClassroomFirebasePath'
+import { getQueryPath } from '../../utils/getClassroomFirebasePath'
 import useDatabases from '../../hooks/metabase/useDatabases'
 import Button from '../Button'
 

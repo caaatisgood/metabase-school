@@ -1,6 +1,6 @@
 import { useObjectVal } from 'react-firebase-hooks/database'
-import { getPeersPath } from '../libs/getClassroomFirebasePath'
-import getFirebaseRef from '../libs/getFirebaseRef'
+import { getPeersPath } from '../utils/getClassroomFirebasePath'
+import getFirebaseRef from '../utils/getFirebaseRef'
 import { Users } from '../types/user'
 
 const useClassroomPeers = ({ randomKey }: { randomKey: string }): Users => {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
-import firebase from '../libs/firebase/init'
+import firebase from '../utils/firebase/init'
 import { useRouter } from 'next/router'
-import Storage from '../libs/storage'
+import Storage from '../utils/storage'
 import { USERNAME_STORAGE_KEY, SESSION_ID_STORAGE_KEY } from '../constants/storage'
 
 type Identity = {

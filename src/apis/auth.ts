@@ -1,8 +1,8 @@
 import Router from 'next/router'
-import Storage from '../libs/storage'
-import fetcher from '../libs/fetcher'
+import Storage from '../utils/storage'
+import fetcher from '../utils/fetcher'
 import { SESSION_ID_STORAGE_KEY, USERNAME_STORAGE_KEY } from '../constants/storage'
-import { signIn } from '../libs/firebase/auth'
+import { signIn } from '../utils/firebase/auth'
 
 type LoginParams = {
   username: string

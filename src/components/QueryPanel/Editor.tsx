@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import firebase from 'firebase/app'
 import styled from 'styled-components'
-import getFirebaseRef from '../../libs/getFirebaseRef'
+import getFirebaseRef from '../../utils/getFirebaseRef'
 import * as monacoEditorTypes from '../../types/monacoEditor'
 
 const MonacoEditor = dynamic(import('@monaco-editor/react'), { ssr: false })

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import getFirebaseRef from '../libs/getFirebaseRef'
-import { getClassroomPath } from '../libs/getClassroomFirebasePath'
-import isApiHostPreconfigured from '../libs/isApiHostPreconfigured'
-import cleanApiHost from '../libs/cleanApiHost'
+import getFirebaseRef from '../utils/getFirebaseRef'
+import { getClassroomPath } from '../utils/getClassroomFirebasePath'
+import isApiHostPreconfigured from '../utils/isApiHostPreconfigured'
+import cleanApiHost from '../utils/cleanApiHost'
 import useMetabaseApiHost from '../hooks/useMetabaseApiHost'
 import { FBClassroom } from '../types/firebase'
 
