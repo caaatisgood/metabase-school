@@ -14,6 +14,7 @@ That's why "Metabase School" comes into play. It's **a realtime collaborative ed
 - Realtime collaborative editor, made with [Firebase Realtime Database](https://firebase.google.com/docs/database), [Firepad](https://github.com/FirebaseExtended/firepad), [Monaco Editor](https://microsoft.github.io/monaco-editor/) and [@monaco-editor/react](https://github.com/suren-atoyan/monaco-react).
 - [Metabase API](https://www.metabase.com/docs/latest/api-documentation.html) integrated, which enable you to query directly from your own Metabase.
 
+Click the image below to see a demo video: [![](https://user-images.githubusercontent.com/12913401/114265344-dc44e400-9a22-11eb-9171-a9e01fcdfdac.png)](https://user-images.githubusercontent.com/12913401/114265050-304ec900-9a21-11eb-9d6c-0e04d6f9f553.mp4)
 
 ## Requirements
 
