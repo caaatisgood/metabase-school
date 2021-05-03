@@ -2,43 +2,43 @@
 
 ## Motivation
 
-Almost a year ago (around Jan, 2020), some folks from my company ([Arc](https://arc.dev) & [Codementor](https://www.codementor.io/)), who are good at writing SQL, decided to start an entry-level SQL class for everyone. We had a few classes where everyone will listen to the SQL experts, and then go to one of our frequently used querying tool - Redash, for practice. That's how "SQL master class" started. Everything happened in the same meeting room, face to face, like a computer class in college.
+Almost a year ago (around Jan 2020), some folks from my company ([Arc](https://arc.dev) & [Codementor](https://www.codementor.io/)), who are good at writing SQL, decided to start an entry-level SQL class for everyone. We had a few classes where everyone will listen to the SQL experts, and then go to one of our frequently used querying tool, Redash, for practice. That's how "SQL master class" started. Everything happened in the same meeting room, face-to-face, like a computer class in college.
 
-Then COVID-19 hits. The fully remote working policy develops. We immediately found it difficult to sustain the "SQL master class" remotely. Because, among the remote meeting tools we used at that time (a.k.a., Zoom or Google Meet), none of them allow the SQL experts to understand everyone's learning status at any time like the way it worked in non-remote circumstance. Any colleges who may struggle with getting the query right, won't be able to get immediate help because there're much more barriers to share queries with one another.
+Then COVID-19 hit, and we transitioned to a fully remote work policy. We immediately found it difficult to sustain "SQL master class" remotely. The remote tools we used (a.k.a., Zoom or Google Meet) didn't allow the SQL experts to understand everyone's learning status at any given time the way they could in a non-remote environment. Colleagues who were struggling with getting the query right couldn't get immediate help — there's just too high of a barrier to sharing queries with one another remotely.
 
-That's why "Metabase School" comes into play. It's **a realtime collaborative editor, integrated with Metabase API, which can let you write or see others' query and execute it to get the result**.
+That's how "Metabase School" was born. It's **a real-time collaborative editor, integrated with the Metabase API, which lets multiple people write, view, and execute queries together**.
 
 
 ## Features
 
-- Realtime collaborative editor, made with [Firebase Realtime Database](https://firebase.google.com/docs/database), [Firepad](https://github.com/FirebaseExtended/firepad), [Monaco Editor](https://microsoft.github.io/monaco-editor/) and [@monaco-editor/react](https://github.com/suren-atoyan/monaco-react).
-- [Metabase API](https://www.metabase.com/docs/latest/api-documentation.html) integrated, which enable you to query directly from your own Metabase.
+- Real-time collaborative editor, made with [Firebase Realtime Database](https://firebase.google.com/docs/database), [Firepad](https://github.com/FirebaseExtended/firepad), [Monaco Editor](https://microsoft.github.io/monaco-editor/) and [@monaco-editor/react](https://github.com/suren-atoyan/monaco-react).
+- Integrated [Metabase API](https://www.metabase.com/docs/latest/api-documentation.html), which enables you to query directly from your own Metabase.
 
 Click the image below to see a demo video: [![](https://user-images.githubusercontent.com/12913401/114265344-dc44e400-9a22-11eb-9171-a9e01fcdfdac.png)](https://user-images.githubusercontent.com/12913401/114265050-304ec900-9a21-11eb-9d6c-0e04d6f9f553.mp4)
 
 ## Requirements
 
-- A [Metabase](https://www.metabase.com/) with following API endpoints available:
+- A [Metabase](https://www.metabase.com/) instance with the following API endpoints:
   - `POST` `/api/session`
   - `GET` `/api/user/current`
   - `GET` `/api/database`
   - `POST` `/api/dataset`
 - Decide if you want to self-host Metabase School
-  - [not to self-host](#Not-to-self-host)
-  - [self-hosting](#Self-hosting)
+  - [Not to self-host](#Not-to-self-host)
+  - [Self-hosting](#Self-hosting)
 
 ### Self-hosting
 
-Metabase School uses [Netlify](https://www.netlify.com/) & [Netlify Functions](https://www.netlify.com/products/functions/) to host the site itself and provide APIs that interact with your Metabase API.
+Metabase School uses [Netlify](https://www.netlify.com/) & [Netlify Functions](https://www.netlify.com/products/functions/) to host the site and provide APIs that interact with your Metabase API.
 
-As to the collaborative code editor, it leveraged Firebase Realtime Database to make it work.
+As for the collaborative code editor, it leverages Firebase Realtime Database to make it work.
 
 
 **Set up Firebase**
 
 - Create a [Firebase](https://console.firebase.google.com/) project
 - Go to **Project settings > Service Accounts**, hit **Generate new private key**. A JSON config file should be downloaded.
-- Go to **Realtime Database**, create your database in **locked mode**.
+- Go to **Realtime Database**, and create your database in **locked mode**.
 - In **Realtime Database > Rules > Edit**, replace it with:
 ```json
 {
@@ -87,18 +87,18 @@ NEXT_PUBLIC_METABASE_API_HOST=<YOUR_METABASE_API_HOST>
 
 - Go to https://metabase-school.netlify.app/
 - Put in your Metabase API host
-- Login with the exact credential you used for your Metabase, and you're go to go!
+- Login with the exact credentials you use for your Metabase, and you're good to go!
 
 
 ## Development
 
 ### Installation
-- clone this repo
-- install dependencies
+- Clone this repo
+- Install dependencies
 ```sh
 npm i
 ```
-- install [Netlify CLI](https://cli.netlify.com/)
+- Install [Netlify CLI](https://cli.netlify.com/)
 ```sh
 npm i -g netlify-cli
 ```
