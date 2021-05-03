@@ -81,7 +81,7 @@ NEXT_PUBLIC_FIREBASE_DATABASE_URL=<YOUR_FIREBASE_DATABASE_URL>
 NEXT_PUBLIC_METABASE_API_HOST=<YOUR_METABASE_API_HOST>
 ```
 - Visit your Netlify app
-- Login with the exact credential you used for your Metabase, and you're go to go!
+- Login with the exact credential you used for your Metabase, and you're good to go!
 
 ### Not to self-host
 
